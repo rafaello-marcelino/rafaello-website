@@ -80,7 +80,7 @@ public class EmailService {
 		emailRepo.deleteById(id);
 	}
 	
-	public Message sendEmail(Email mail) throws Exception {  
+	public void sendEmail(Email mail) throws Exception {  
 		
 		 final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 		 GsonFactory jsonFactory = GsonFactory.getDefaultInstance();
@@ -96,7 +96,7 @@ public class EmailService {
 		    email.addRecipient(RecipientType.TO,
 		        new InternetAddress(SENDER_EMAIL));
 		    email.setSubject("Website Message from:" + mail.getName());
-		    email.setText(mail.getMessage()+ "\nContact information is: " + mail.getEmail());
+		    email.setText("\nContact information is: " + mail.getEmail() + " /n Message: " +mail.getMessage());
 
 		    // Encode and wrap the MIME message into a gmail message
 		    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -111,7 +111,6 @@ public class EmailService {
 		        message = service.users().messages().send("me", message).execute();
 		        System.out.println("Message id: " + message.getId());
 		        System.out.println(message.toPrettyString());
-		        return message;
 		      } catch (GoogleJsonResponseException e) {
 		        // TODO(developer) - handle error appropriately
 		        GoogleJsonError error = e.getDetails();
@@ -121,7 +120,6 @@ public class EmailService {
 		          throw e;
 		        }
 		      }
-		      return null;
 	}
 	
 
