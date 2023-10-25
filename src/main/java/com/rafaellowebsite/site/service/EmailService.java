@@ -96,7 +96,7 @@ public class EmailService {
 		    email.addRecipient(RecipientType.TO,
 		        new InternetAddress(SENDER_EMAIL));
 		    email.setSubject("Website Message from:" + mail.getName());
-		    email.setText("\nContact information is: " + mail.getEmail() + " /n Message: " +mail.getMessage());
+		    email.setText("Contact information is: " + mail.getEmail() + " \nMessage: " +mail.getMessage());
 
 		    // Encode and wrap the MIME message into a gmail message
 		    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
