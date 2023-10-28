@@ -81,7 +81,7 @@ public class EmailService {
 	}
 	
 	public void sendEmail(Email mail) throws Exception {  
-		
+		System.out.println("Sending Email");
 		 final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 		 GsonFactory jsonFactory = GsonFactory.getDefaultInstance();
 		    Gmail service = new Gmail.Builder(httpTransport, jsonFactory, getCredentials(httpTransport, jsonFactory))

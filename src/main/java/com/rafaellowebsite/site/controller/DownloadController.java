@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,9 +26,10 @@ public class DownloadController {
 		 
 	@Autowired
 	private ResourceLoader resourceLoader;
-		 
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping
-	public void downloadSampleCSV(HttpServletRequest request,
+	public void downloadResume(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		LOGGER.info("Inside the download controller," +
 		        " resource fileName =" + RESUME_NAME);
@@ -35,7 +37,7 @@ public class DownloadController {
 			.getResource("classpath:" + RESUME_NAME);
 		if (resource.exists()) {
 			LOGGER.info("Resource exists!");
-			response.setContentType("text/csv");
+			response.setContentType("application/pdf");
 			response.setHeader("Content-Disposition",
 					String.format("attachment; filename=" +resource.getFilename()));
 		   response.setContentLength((int) resource.contentLength());

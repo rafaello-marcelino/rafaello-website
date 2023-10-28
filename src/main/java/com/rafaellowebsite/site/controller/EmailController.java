@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +35,8 @@ public class EmailController {
 		System.out.println("Connected");
 		return new ResponseEntity<>("Connected", HttpStatus.OK);
 	}
-	
+
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/send")
 	public ResponseEntity<String> sendEmail(@RequestBody Email email) throws MessagingException, IOException {
 		try {
